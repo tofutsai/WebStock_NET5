@@ -42,16 +42,17 @@ namespace WebStock_NET5.Controllers
                 {
                     var payload = new UserInfo
                     {
-                        operId = f.id,
-                        operAccount = f.account,
-                        operName = f.name
+                        OperId = member.id,
+                        OperAccount = member.account,
+                        OperName = member.name,
+                        OperIsAdmin = member.isAdmin
                     };
                     string JWTToken = EncodeJWTToken(payload);
                     data = new UserInfo();
-                    data.operId = member.id;
-                    data.operAccount = member.account;
-                    data.operName = member.name;
-                    data.isAdmin = member.isAdmin;
+                    data.OperId = member.id;
+                    data.OperAccount = member.account;
+                    data.OperName = member.name;
+                    data.OperIsAdmin = member.isAdmin;
                     data.JWToken = JWTToken;
                 }
 
@@ -100,6 +101,46 @@ namespace WebStock_NET5.Controllers
             {
                 status = false;
                 msg = "資料輸入錯誤!";
+            }
+
+            return new JsonResult(new Results<DBNull>
+            {
+                Success = status,
+                Message = msg,
+                Data = null,
+                TotalCount = status ? 1 : 0
+            });
+        }
+
+        [HttpPost]
+        public JsonResult EditPassword(EditPas editPas)
+        {
+            bool status = true;
+            bool check = true;
+            string msg = "";
+            if (string.IsNullOrEmpty(editPas.oldPassword))
+            {
+                check = false;
+            }
+            if (string.IsNullOrEmpty(editPas.newPassword))
+            {
+                check = false;
+            }
+            if (string.IsNullOrEmpty(editPas.newPasswordCheck))
+            {
+                check = false;
+            }
+            if (editPas.newPassword != editPas.newPasswordCheck)
+            {
+                check = false;
+                status = false;
+                msg = "新密碼不一致，請重新輸入";
+            }
+            if (check)
+            {
+                string s = _IStockMemberDAL.EditPassword(editPas);
+                status = s != "02" && s != "03" ? true : false;
+                msg = s != "02" ? s != "03" ? "密碼修改成功!" : "舊密碼輸入錯誤!" : "密碼修改失敗!";
             }
 
             return new JsonResult(new Results<DBNull>

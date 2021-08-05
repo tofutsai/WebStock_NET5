@@ -20,24 +20,24 @@ namespace WebStock_NET5.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create(string type, string codes, string memoContent)
+        public JsonResult Create(EditMemo editMemo)
         {
             bool status = true;
             bool check = true;
             string msg = "";
 
-            if (string.IsNullOrEmpty(type))
+            if (string.IsNullOrEmpty(editMemo.type))
             {
                 check = false;
             }
-            if (string.IsNullOrEmpty(codes))
+            if (string.IsNullOrEmpty(editMemo.codes))
             {
                 check = false;
             }
 
             if (check)
             {
-                status = _IStockMemoDAL.Create(type, codes, memoContent);
+                status = _IStockMemoDAL.Create(editMemo.type, editMemo.codes, editMemo.memoContent);
                 msg = status ? "更新成功!" : "更新失敗!";
             }
             else

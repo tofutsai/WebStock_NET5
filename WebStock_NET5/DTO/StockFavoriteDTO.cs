@@ -7,6 +7,7 @@ namespace WebStock_NET5.DTO
 {
     public class StockFavoriteDTO
     {
+        public int id { get; set; }
         public string code { get; set; }
         public string memo { get; set; }
         public string type { get; set; }

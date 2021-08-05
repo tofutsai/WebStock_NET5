@@ -27,13 +27,6 @@ namespace WebStock_NET5.Controllers
             List<StockStatisticsDTO> data = null;
             string msg = "";
 
-            //FormSearch f = new FormSearch();
-            //f.options.page = 1;
-            //f.options.itemsPerPage = 10;
-            //f.options.sortBy = new string[] { "id" };
-            //f.options.sortDesc = new bool[] { false };
-            //f.type = "上";
-
             if (string.IsNullOrEmpty(f.type))
             { check = false; }
 

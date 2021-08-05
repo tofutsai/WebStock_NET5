@@ -27,12 +27,6 @@ namespace WebStock_NET5.Controllers
             bool check = true;
             List<StockFavoriteDTO> data = null;
             string msg = "";
-            //FormSearch f = new FormSearch();
-            //f.operId = 4;
-            //f.options.page = 1;
-            //f.options.itemsPerPage = 10;
-            //f.options.sortBy = new string[] { "id" };
-            //f.options.sortDesc = new bool[] { false };
             if (f.operId == 0)
             { check = false; }
 
