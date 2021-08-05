@@ -12,11 +12,17 @@ namespace WebStock_NET5
     {
         public class UserInfo
         {
-            public int operId { get; set; }
-            public string operAccount { get; set; }
-            public string operName { get; set; }
-            public bool isAdmin { get; set; }
+            //public int operId { get; set; }
+            //public string operAccount { get; set; }
+            //public string operName { get; set; }
+            //public bool isAdmin { get; set; }
+            //public string JWToken { get; set; }
             public string JWToken { get; set; }
+            public int OperId { get; set; }
+            public string OperAccount { get; set; }
+            public string OperName { get; set; }
+            public string OperRole { get; set; }
+            public bool OperIsAdmin { get; set; }
         }
 
         public class FormSearch
@@ -115,6 +121,20 @@ namespace WebStock_NET5
             public string clientType { get; set; }
         }
 
+        public class EditPas
+        {
+            public int OperId { get; set; }
+            public string oldPassword { get; set; }
+            public string newPassword { get; set; }
+            public string newPasswordCheck { get; set; }
+        }
+
+        public class EditMemo
+        {
+            public string type { get; set; }
+            public string codes { get; set; }
+            public string memoContent { get; set; }
+        }
 
         public static string TokenSecretKey = "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk";
 

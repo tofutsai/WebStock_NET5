@@ -43,7 +43,7 @@ namespace WebStock_NET5.DAL
         {
             int status = 0;
 
-            var stockSysConfig = _db.sysConfig.Where(x => x.id == f.id).FirstOrDefault();
+            var stockSysConfig = _db.sysConfig.Where(x => x.id == 1).FirstOrDefault();
             Mapper.Initialize(cfg => cfg.CreateMap<sysConfig, sysConfig>()
                                         .ForMember(x => x.id, opt => opt.Ignore()));
             Mapper.Map(f, stockSysConfig);

@@ -13,20 +13,30 @@ namespace WebStock_NET5.Filter
         public UserInfo UserInfo { get; set; }
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            //獲取action名稱
+            var actionName = (string)filterContext.RouteData.Values["action"];
             var header = filterContext.HttpContext.Request.Headers["Content-Language"];
-            if (!string.IsNullOrEmpty(header))
+            if(actionName != "Login")
             {
-                UserInfo = DecodeJWTToken(header);
+                if (!string.IsNullOrEmpty(header))
+                {
+                    UserInfo = DecodeJWTToken(header);
+                    if(UserInfo == null)
+                    {
+                        throw new Exception("Authorization Access denied");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Authorization Access denied");
+                }
             }
-            else
-            {
-                throw new Exception("Authorization Access denied");
-            }
+            
         }
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            context.HttpContext.Response.WriteAsync($"{GetType().Name} out. \r\n");
+            //context.HttpContext.Response.WriteAsync($"{GetType().Name} out. \r\n");
         }
     }
 }

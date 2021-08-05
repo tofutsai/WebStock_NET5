@@ -48,10 +48,6 @@ namespace WebStock_NET5.Controllers
             bool status = true;
             bool check = true;
             string msg = "";
-            if (f.id == 0)
-            {
-                check = false;
-            }
             if(f.stockUpdate == DateTime.MinValue || f.otcUpdate == DateTime.MinValue || f.avgStartDate == DateTime.MinValue
                 || f.avgEndDate == DateTime.MinValue || f.nowDate == DateTime.MinValue)
             {

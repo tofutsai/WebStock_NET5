@@ -144,7 +144,7 @@ namespace WebStock_NET5.DAL
                 string connectionstring = _config["ConnectionStrings:WebStockDatabase"];
                 using (var sqlCopy = new SqlBulkCopy(connectionstring))
                 {
-                    sqlCopy.DestinationTableName = "[stockNow]";
+                    sqlCopy.DestinationTableName = "[stockMemo]";
                     sqlCopy.BatchSize = 2000;
                     sqlCopy.WriteToServer(dt);
                     status = true;

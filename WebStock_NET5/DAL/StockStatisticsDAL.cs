@@ -62,10 +62,10 @@ namespace WebStock_NET5.DAL
                 strSqlTmp += @" WHERE i.type LIKE '%'+ @type +'%' AND a.avgShares >= @shares AND n.position <= @position AND
                                     n.closePrice >= @closePrice {0} {1} {2} ";
                 string sortStr = "ORDER BY ";
-                string sortDESC = (f.options.sortDesc != null && f.options.sortDesc[0]) ? "DESC" : "ASC";
+                string sortDESC = (f.options.sortDesc != null && f.options.sortDesc.Count() > 0 && f.options.sortDesc[0]) ? "DESC" : "ASC";
                 string pageStr = (f.options.page != 0 && f.options.itemsPerPage != 0) ? "OFFSET @OFFSET ROWS FETCH NEXT @FETCH ROWS ONLY" : "";
 
-                string sortByType = (f.options.sortBy != null && f.options.sortBy[0] != "") ? f.options.sortBy[0] : "";
+                string sortByType = (f.options.sortBy != null && f.options.sortBy.Count() > 0 && f.options.sortBy[0] != "") ? f.options.sortBy[0] : "";
                 switch (sortByType)
                 {
                     case "type": sortStr += "i.type"; break;

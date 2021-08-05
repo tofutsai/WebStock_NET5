@@ -187,6 +187,10 @@ namespace WebStock_NET5.DAL
                     sqlCopy.WriteToServer(dt);
                     status = true;
                 }
+                var sysConfig = _db.sysConfig.FirstOrDefault();
+                var stockNow = _db.stockNow.Where(x => x.id == 1).FirstOrDefault();
+                sysConfig.nowDate = stockNow.dataDate;
+                _db.SaveChanges();
                 return status;
             }
             catch (Exception ex)
