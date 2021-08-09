@@ -11,6 +11,7 @@ using System.IO;
 using WebStock_NET5.DAL;
 using WebStock_NET5.DB;
 using WebStock_NET5.Filter;
+using WebStock_NET5.Hubs;
 
 namespace WebStock_NET5
 {
@@ -43,6 +44,9 @@ namespace WebStock_NET5
                      .AllowCredentials();
             }));
 
+            //加入SignalR服務
+            services.AddSignalR();
+
             //Scaffold-DbContext "Server=LAPTOP-82BMHD1B\SQLEXPRESS;Database=WebStock;User ID=sa;Password=Passw0rd;Integrated Security=False;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB -Force -UseDatabaseNames
 
             //資料庫物件的DI注入
@@ -62,7 +66,7 @@ namespace WebStock_NET5
             services.AddScoped<IStockMemoDAL, StockMemoDAL>();
             services.AddScoped<IStockMemberDAL, StockMemberDAL>();
             services.AddControllers();
-
+            
             //MVC 服務中註冊 Filter
             services.AddMvc(config =>
             {
@@ -102,6 +106,7 @@ namespace WebStock_NET5
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
