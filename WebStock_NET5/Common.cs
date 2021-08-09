@@ -143,10 +143,10 @@ namespace WebStock_NET5
 
             var secret = TokenSecretKey;
 
-            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
-            IJsonSerializer serializer = new JsonNetSerializer();
-            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
-            IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
+            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();//加密方式
+            IJsonSerializer serializer = new JsonNetSerializer();//序列化Json
+            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();//base64加解密
+            IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);//JWT編碼
 
             var token = encoder.Encode(payload, secret);
             //Console.WriteLine(token);
